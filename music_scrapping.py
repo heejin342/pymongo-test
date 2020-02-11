@@ -25,7 +25,7 @@ for music in musics:
     print(image)
     title = str(music.select_one('td.info > a.title.ellipsis').text).strip()
     print(title)
-    artist = str(music.select_one(' td.info > a.artist.ellipsis').text).strip()
+    artist = str(music.select_one('td.info > a.artist.ellipsis').text).strip()
     print(artist)
 
     music_data = {
