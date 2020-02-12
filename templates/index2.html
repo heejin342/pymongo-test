@@ -1,0 +1,334 @@
+<html>
+<head>
+    <title>희진이 두번째 숙제!</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- 부트스트랩을 사용한다  -->
+
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <!-- 폰트가져옴 -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <style>
+		* {
+			font-family: 'Stylish', sans-serif;
+		}	
+
+		span{
+			font-size: 20px;
+		}
+
+		p{
+			font-size: 40px;
+		}
+
+		p4{
+			font-size: 25px;
+			color: lightgrey;
+		}
+
+		.b{
+			border: 0px;
+		}
+
+		.class1 {
+			width: 600px;
+			height: 50px;
+			margin: 450px auto 0 auto; 
+
+			/*마진은 바깥쪽, 페딩은 안쪽*/
+			/*			border: 1px solid #000;*/
+			/*마진의 네가지 속성을 순서대로 위에서 50떨어짐. auto 는 자동정렬해서 가운데로 맞춰준다 */
+
+			/*border 가능도 있음. 보더는 테두리를 의미한다.*/
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		table{
+			border-collapse: collapse;
+		}
+
+		.table-bordered th {
+			border: 1px solid white;
+		}
+
+		.table-bordered td{
+			border: 1px solid white;
+			border-bottom-color: lightgray;
+		}
+		
+
+
+    </style>
+
+    <script type="text/javascript">
+
+		function check(){
+<!--			$.ajax({-->
+<!--				type: "GET",-->
+<!--				url: "/test?title_give=봄날은간다--get",-->
+<!--				data: {},-->
+<!--				success: function(response){-->
+<!--					console.log(response)-->
+<!--				}-->
+<!--			  })-->
+
+<!--			$.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/test",-->
+<!--                data: { title_give:'봄날은간다--post' },-->
+<!--                success: function(response){-->
+<!--                    console.log(response)-->
+<!--                }-->
+<!--		  })-->
+
+<!--			$.ajax({-->
+<!--                type: "GET",-->
+<!--                url: "/test?rank_give=3",-->
+<!--                data: {},-->
+<!--                success: function(response){-->
+<!--                    console.log(response)-->
+<!--                }-->
+<!--		  })-->
+
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/test",-->
+<!--                data: {rank_give:2,star_give:5},-->
+<!--                success: function(response){-->
+<!--                    console.log(response)-->
+<!--                }-->
+<!--              })-->
+<!--		}-->
+
+
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/new",-->
+<!--                data: { rank_give:'999', star_give:'10', title_give:'안녕하세요' },-->
+<!--                success: function(response){-->
+<!--                    console.log(response)-->
+<!--                }-->
+<!--              })-->
+<!--              -->
+
+<!--flask meta test-->
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/post",-->
+<!--                data: {url_give:'https://platum.kr/archives/127938',comment_give:'코멘트'},-->
+<!--                success: function(response){-->
+<!--                   console.log(response)-->
+<!--                }-->
+<!--              })-->
+
+
+        $.ajax({
+                type: "GET",
+                url: "/post",
+                data: {},
+                success: function(response){
+                   console.log(response)
+                }
+              })
+
+		$(document).ready(function(){
+			$('#table_body').html('');
+			listing();
+		});
+
+
+		function listing() {
+			$.ajax({
+				type: "GET",
+				url: "http://spartacodingclub.shop/order",
+				data: {},
+				success: function(response){
+					let orders = response['orders'];
+					for (let i = 0; i < 10; i++) {
+						make_table_list(orders[i]['name'],orders[i]['count'],orders[i]['address'],orders[i]['phone'])
+					}
+				}
+			})
+		}
+
+		function make_table_list(name, count, address, phone) {
+			let temp_html =
+			'<tr><td>' + name + '</td>+<td>not selected</td>+<td>' + count + '</td>+<td>' +address + '</td>+<td>' + phone + '</td></tr>';
+
+			$('#table_body').append(temp_html);
+		}
+
+
+		function init(){
+
+			$('#name').val("");
+			$('#inputGroupSelect03').val("-- 종류를 선택하세요 --");
+			$('#inputGroupSelect04').val("-- 수량을 선택하세요 --");
+			$('#addr').val("");
+			$('#PN').val("");
+
+			$('#name').focus();
+			return;
+		}
+
+		function make_table(){
+			let name = $('#name').val();
+			let sort = $('#inputGroupSelect03').val();
+			let cnt = $('#inputGroupSelect04').val();
+			let addr = $('#addr').val();
+			let PN = $('#PN').val();
+
+			let temp_html2 = '<tr><td>' + name + '</td>+<td>' + sort + '</td>+<td>' +cnt + '</td>+<td>' + addr + '</td>+<td>' + PN +'</td>+</tr>';
+			$('#table_body').append(temp_html2);
+		}
+
+		function ccclick(){
+
+			if($('#name').val() == ""){
+				alert('주문자 이름을 입력하세요');
+				$('#name').focus();
+				return;
+			}
+
+			if($('#inputGroupSelect03').val()=="-- 종류를 선택하세요 --"){
+				alert('종류 옵션을 선택해주세요');
+				$('#inputGroupSelect03').focus();  //선택하면 .val() 값은 1,2,3 임
+				return;
+			}
+
+			if($('#inputGroupSelect04').val()=="-- 수량을 선택하세요 --"){
+				alert('수량 옵션을 선택해주세요');
+				$('#inputGroupSelect04').focus(); 
+				return;
+			}
+
+			if($('#addr').val()==""){
+				alert('주소를 입력하세요');
+				$('#addr').focus();  
+				return;
+			}
+
+			let regPhone =  /^010-\d{3,4}-\d{4}$/;
+
+			if($('#PN').val()==""){
+				alert('번호를 입력하세요');
+				$('#PN').focus();
+				return;
+			}
+
+			if((regPhone.test($('#PN').val())==false)){
+				alert('전화번호 형식이 틀렸습니다 010-0000-0000 형태로 입력하세요');
+				$('#PN').focus();
+				return;
+			}
+			if((regPhone.test($('#PN').val())==true)){
+				alert('주문완료!!');
+				make_table();
+				init();
+				return;
+			}
+		}
+
+
+    </script>
+</head>
+<body>
+<div class="class1">
+    <div class="card b">
+        <img class="card-img-top" src=".\static\215024921911.jpg" alt="Card image cap" height="450px">
+        <div class="card-body">
+            <p class="card-title">Christmas snow Orgel&nbsp&nbsp&nbsp
+                <p4>|</p4>
+                &nbsp&nbsp <span>가격:13,000원/개</span>
+            </p>
+            <p5 class="card-text">연인, 친구에게 선물로 안성맞춤 ! 크리스마스 스노우 오르골과 함께 따뜻한 겨울을 보내세요 :)</p5>
+            <p class="card-text comment"></p>
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">주문자 이름</span>
+                </div>
+                <input type="text" id="name" class="form-control" placeholder="" aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon">종류선택</span>
+                </div>
+                <select class="custom-select" id="inputGroupSelect03">
+                    <option selected>-- 종류를 선택하세요 --</option>
+                    <option value="1">Option 1 -
+                        Jesus and Santa
+                    </option>
+                    <option value="2">Option 2 -
+                        Santa
+                    </option>
+                    <option value="3">Option 3 -
+                        Santa village
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">수량</span>
+                </div>
+                <select class="custom-select" id="inputGroupSelect04">
+                    <option selected>-- 수량을 선택하세요 --</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">주소</span>
+                </div>
+                <input type="text" id="addr" class="form-control" placeholder="" aria-label="Useraddr"
+                       aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon4">전화번호</span>
+                </div>
+                <input type="text" id="PN" class="form-control" placeholder="" aria-label="UserPN"
+                       aria-describedby="basic-addon1">
+            </div>
+
+            <div style="text-align:center;">
+                <button type="button" class="btn btn-secondary" onclick="ccclick()"> 주문하기
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <table id="foo-table" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>종류(번)</th>
+                    <th>수량(개)</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                </tr>
+                </thead>
+                <tbody id="table_body">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<button onclick="check()">111111</button>
+</body>
+</html>
