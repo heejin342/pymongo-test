@@ -28,17 +28,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.VCS" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\user\Desktop\sparta\pymongo-test" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\sparta\pymongo-test" />
-      <recent name="C:\Users\user\Desktop\sparta\pymongo-test\static" />
       <recent name="C:\Users\user\Desktop\sparta\pymongo-test\templates" />
+      <recent name="C:\Users\user\Desktop\sparta\pymongo-test\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\sparta\pymongo-test" />
     </key>
   </component>
   <component name="RunManager" selected="Python.music_scrapping">
